@@ -2,9 +2,8 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { Sparkles, Download, Bell, CreditCard, Shield, Zap, TrendingUp, Check, Star, Users, Lock, ArrowRight, Globe, BarChart3, DollarSign, Calendar, ChevronDown, Play } from "lucide-react";
+import { Sparkles, Download, Bell, CreditCard, Shield, Zap, TrendingUp, Check, Star, Lock, ArrowRight, Globe, BarChart3, DollarSign, Calendar, ChevronDown, Play } from "lucide-react";
 import { useState } from "react";
-import { image } from "framer-motion/client";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 40 },
@@ -714,7 +713,7 @@ const Homepage = () => {
         ))}
       </div>
       <p className="text-lg text-gray-100 mb-6 leading-relaxed italic">
-        "{testimonial.quote}"
+        &quot;{testimonial.quote}&quot;
       </p>
       <div className="flex items-center gap-4">
         <div 
@@ -959,7 +958,7 @@ const Homepage = () => {
                 Ready to Take Control?
               </h2>
               <p className="text-xl text-white/90 mb-10 max-w-2xl mx-auto">
-                Join thousands of users who've already saved money and gained peace of mind. Start your 14-day free trial today.
+                Join thousands of users who&apos;ve already saved money and gained peace of mind. Start your 14-day free trial today.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <button className="group px-10 py-5 bg-white text-[#ff0000] font-bold rounded-full shadow-2xl hover:shadow-white/50 transition-all transform hover:scale-105 text-lg flex items-center justify-center gap-2">
