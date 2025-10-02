@@ -723,7 +723,7 @@ const Homepage = () => {
         ></div>
         <div>
           <h4 className="font-bold">{testimonial.author}</h4>
-          <p className="text-sm text-black">{testimonial.role}</p>
+          <p className="text-sm text-white/70">{testimonial.role}</p>
         </div>
       </div>
     </motion.div>
@@ -1017,8 +1017,8 @@ const Homepage = () => {
                 <li><a href="#features" className="hover:text-white transition-colors">Features</a></li>
                 <li><a href="#pricing" className="hover:text-white transition-colors">Pricing</a></li>
                 <li><a href="#" className="hover:text-white transition-colors">Security</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Integrations</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">API</a></li>
+                <li><a href="#" className="hover:text-white transition-colors"></a></li>
+                <li><a href="#" className="hover:text-white transition-colors"></a></li>
               </ul>
             </div>
             <div>
@@ -1038,7 +1038,7 @@ const Homepage = () => {
                 <li><a href="#" className="hover:text-white transition-colors">Contact Us</a></li>
                 <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
                 <li><a href="#" className="hover:text-white transition-colors">Terms of Service</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Cookie Policy</a></li>
+                <li><a href="#" className="hover:text-white transition-colors"></a></li>
               </ul>
             </div>
           </div>
