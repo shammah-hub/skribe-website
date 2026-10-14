@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { JsonLd } from "../components/site/JsonLd";
-import { breadcrumbLd, faqLd, pageMeta } from "../components/site/seo";
+import { faqLd, pageMeta } from "../components/site/seo";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Play, Star } from "lucide-react";
