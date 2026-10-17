@@ -23,6 +23,8 @@ export const routes: { path: string; priority: number; changeFrequency: "weekly"
   { path: "/about", priority: 0.5, changeFrequency: "yearly" },
   { path: "/brand", priority: 0.3, changeFrequency: "yearly" },
   { path: "/contact", priority: 0.4, changeFrequency: "yearly" },
+  { path: "/privacy", priority: 0.3, changeFrequency: "yearly" },
+  { path: "/terms", priority: 0.3, changeFrequency: "yearly" },
 ];
 
 /** Per-page metadata: title, description, canonical, Open Graph and Twitter. */

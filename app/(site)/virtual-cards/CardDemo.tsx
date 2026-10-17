@@ -144,7 +144,7 @@ export function CardDemo() {
 
       {/* Right: recent charges */}
       <div className={`${card} flex flex-col p-6`}>
-        <div className="mb-2 flex items-center justify-between gap-4">
+        <div className="mb-2 flex flex-wrap items-center justify-between gap-3">
           <p className={`${mono.className} text-xs uppercase tracking-[0.16em] text-[#15130F]/55`}>Recent charges</p>
           <Btn variant="outline" onClick={simulate} className="!h-10 !px-4 !text-sm">
             Simulate a charge
@@ -216,7 +216,7 @@ function DetailsSheet({ onClose }: { onClose: () => void }) {
         aria-modal="true"
         aria-label="Card details"
         onClick={(e) => e.stopPropagation()}
-        className="w-full max-w-md rounded-3xl bg-[#FFFDF8] p-6"
+        className="max-h-[90vh] w-full max-w-md overflow-y-auto rounded-3xl bg-[#FFFDF8] p-6"
       >
         <h3 className={`${serif.className} text-3xl font-normal tracking-tight`}>Card details</h3>
         <p className="mt-1 text-sm text-[#15130F]/60">Never share these with anyone. (Demo numbers.)</p>

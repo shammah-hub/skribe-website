@@ -36,9 +36,7 @@ export function Receipt() {
     <div className="relative mx-auto w-full max-w-sm rotate-[2deg] drop-shadow-[0_24px_28px_rgba(21,19,15,0.16)]">
       <div className="px-7 pb-8 pt-8" style={{ backgroundColor: C.sheet }}>
         <div className="flex flex-col items-center text-center">
-          <span className="grid h-10 w-10 place-items-center rounded-xl" style={{ backgroundColor: C.red }}>
-            <Image width={20} height={20} className="h-5 w-5" src="/skribe2.png" alt="" />
-          </span>
+            <Image width={60} height={20} className="h-5 w-20" src="/skribelogo2.png" alt="" />
           <p className={`${mono.className} mt-3 text-[11px] uppercase tracking-[0.2em] text-[#15130F]/60`}>Monthly statement</p>
         </div>
 

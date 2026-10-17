@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { Eye, EyeOff, Snowflake } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 
 /**
  * The Skribe card, drawn from the app's CustomBankCard (utensils.dart).
@@ -21,7 +21,10 @@ import { useState } from "react";
  * (Without them it falls back to flat red and no logo.)
  */
 const BASE = 350; // the app's card width in logical px
-const q = (px: number) => `${((px / BASE) * 100).toFixed(3)}cqw`;
+// One design pixel = --u. It starts as 1/350 of the card width using container units, and
+// is replaced by a measured pixel value as soon as the page loads, so older phone browsers
+// that do not understand `cqw` still get a card that fits.
+const q = (px: number) => `calc(var(--u) * ${px})`;
 
 const fmt = (n: number) => n.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
@@ -44,9 +47,34 @@ export function SkribeCard({
   expiry?: string;
 }) {
   const [visible, setVisible] = useState(true);
+  const [unit, setUnit] = useState<number | null>(null);
+  const box = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = box.current;
+    if (!el) return;
+    const measure = () => {
+      // clientWidth ignores any rotation applied by a parent.
+      if (el.clientWidth) setUnit(el.clientWidth / BASE);
+    };
+    measure();
+    if (typeof ResizeObserver === "undefined") return;
+    const ro = new ResizeObserver(measure);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
 
   return (
-    <div className={`w-full ${className}`} style={{ containerType: "inline-size" }}>
+    <div
+      ref={box}
+      className={`w-full min-w-0 ${className}`}
+      style={
+        {
+          containerType: "inline-size",
+          "--u": unit ? `${unit}px` : "calc(100cqw / 350)",
+        } as CSSProperties
+      }
+    >
       <div
         className="relative w-full overflow-hidden text-white"
         style={{
