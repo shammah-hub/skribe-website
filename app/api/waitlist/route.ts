@@ -2,13 +2,24 @@ import { NextResponse } from "next/server";
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
-/**
- * TODO: store the email somewhere. Right now it is only logged on the server.
- * Pick one: Firestore (firebase-admin), Resend / Mailchimp audience, a Google Sheet, your database.
- * Throw an error from here if saving fails and the visitor will see a friendly message.
- */
+/** Sends a notification email to the Skribe inbox through EmailJS. */
 async function saveToWaitlist(email: string) {
-  console.log("[waitlist]", email);
+  const res = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      service_id: process.env.EMAILJS_SERVICE_ID,
+      template_id: process.env.EMAILJS_TEMPLATE_ID,
+      user_id: process.env.EMAILJS_PUBLIC_KEY,
+      accessToken: process.env.EMAILJS_PRIVATE_KEY,
+      template_params: { user_email: email },
+    }),
+  });
+
+  if (!res.ok) {
+    console.error("[waitlist] EmailJS error:", res.status, await res.text());
+    throw new Error("EmailJS failed");
+  }
 }
 
 export async function POST(req: Request) {

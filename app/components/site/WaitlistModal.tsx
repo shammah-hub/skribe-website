@@ -130,7 +130,9 @@ function WaitlistDialog({ onClose }: { onClose: () => void }) {
 
         {state === "done" ? (
           <div className="pt-2">
-            <Stamp className="-rotate-6">On the list</Stamp>
+            <Stamp slam className="-rotate-6">
+              On the list
+            </Stamp>
             <h2 id="waitlist-title" className={`${serif.className} mt-8 text-4xl font-normal tracking-tight`}>
               You&apos;re in.
             </h2>

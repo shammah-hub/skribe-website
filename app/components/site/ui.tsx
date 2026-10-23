@@ -2,7 +2,7 @@
 
 // Shared building blocks. Client file: server pages import the components,
 // but constants and tokens live in theme.ts.
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { useState, type ReactNode } from "react";
@@ -113,22 +113,43 @@ export function Label({ n, children, color = C.red }: { n?: string; children: Re
 export function Logo() {
   return (
     <span className="flex items-center gap-2">
-      <span className="grid h-9 w-9 place-items-center rounded-xl" style={{ backgroundColor: C.red }}>
-        <Image width={20} height={20} className="h-5 w-5" src="/skribe2.png" alt="Skribe logo" />
-      </span>
-      <span className={`${serif.className} text-[28px] font-normal leading-none tracking-tight`}>kribe</span>
+        <Image width={50} height={20} className="h-5 w-20" src="/skribelogo2.png" alt="Skribe logo" />
     </span>
   );
 }
 
-export function Stamp({ children, className = "" }: { children: ReactNode; className?: string }) {
+export function Stamp({
+  children,
+  className = "",
+  slam = false,
+}: {
+  children: ReactNode;
+  className?: string;
+  /** Plays a rubber-stamp slam when it mounts. */
+  slam?: boolean;
+}) {
+  const reduce = useReducedMotion();
+  const cls = `${mono.className} inline-block rounded-md border-[3px] border-double px-3 py-1 text-xl font-medium uppercase tracking-[0.2em] ${className}`;
+  const style = { borderColor: C.red, color: C.red };
+
+  if (!slam || reduce) {
+    return (
+      <span className={cls} style={style}>
+        {children}
+      </span>
+    );
+  }
+
   return (
-    <span
-      className={`${mono.className} inline-block rounded-md border-[3px] border-double px-3 py-1 text-xl font-medium uppercase tracking-[0.2em] ${className}`}
-      style={{ borderColor: C.red, color: C.red }}
+    <motion.span
+      className={cls}
+      style={style}
+      initial={{ opacity: 0, scale: 2.4, rotate: -12 }}
+      animate={{ opacity: 1, scale: [2.4, 0.9, 1], rotate: 0 }}
+      transition={{ duration: 0.5, delay: 0.15, times: [0, 0.65, 1], ease: [0.22, 1, 0.36, 1] }}
     >
       {children}
-    </span>
+    </motion.span>
   );
 }
 
