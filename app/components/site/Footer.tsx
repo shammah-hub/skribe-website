@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { C, container, mono, serif } from "./theme";
+import { C, container, mono } from "./theme";
 import { Logo } from "./ui";
 import { WaitlistLink } from "./WaitlistModal";
 
@@ -34,6 +34,31 @@ const cols = [
   },
 ];
 
+// Classes are written out in full so Tailwind can see them at build time.
+// Replace each href with your real profile URL.
+const socials = [
+  {
+    label: "X",
+    glyph: "𝕏",
+    href: "#",
+    hover: "hover:border-black hover:bg-black",
+  },
+  {
+    label: "Facebook",
+    glyph: "f",
+    href: "#",
+    hover: "hover:border-[#1877F2] hover:bg-[#1877F2]",
+  },
+  {
+    // Instagram's brand gradient: yellow glow bottom-left, through orange, pink and purple to blue.
+    label: "Instagram",
+    glyph: "ig",
+    href: "#",
+    hover:
+      "hover:border-transparent hover:bg-[radial-gradient(circle_at_30%_107%,#fdf497_0%,#fdf497_5%,#fd5949_45%,#d6249f_60%,#285AEB_90%)]",
+  },
+];
+
 export function Footer() {
   return (
     <footer className="relative overflow-hidden border-t border-[#15130F]/20">
@@ -42,18 +67,20 @@ export function Footer() {
           <div className="md:col-span-2">
             <Logo />
             <p className="mt-4 max-w-sm leading-relaxed text-[#15130F]/70">
-              Smart subscription banking for the modern world. Take control of your recurring payments and never miss a
-              charge again.
+              Track your subscriptions, pay with a virtual card and never miss a charge again. Skribe is not a bank. Financial
+               services are provided through licensed partners.
             </p>
             <div className="mt-6 flex gap-3">
-              {["𝕏", "in", "f", "ig"].map((s) => (
+              {socials.map((s) => (
                 <a
-                  key={s}
-                  href="#"
-                  aria-label={s}
-                  className="grid h-10 w-10 place-items-center rounded-full border border-[#15130F]/25 text-sm font-medium transition hover:border-[#15130F] hover:bg-[#15130F] hover:text-[#F4EFE6]"
+                  key={s.label}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={s.label}
+                  className={`grid h-10 w-10 place-items-center rounded-full border border-[#15130F]/25 text-sm font-medium transition hover:text-white ${s.hover}`}
                 >
-                  {s}
+                  {s.glyph}
                 </a>
               ))}
             </div>
@@ -95,12 +122,16 @@ export function Footer() {
         </div>
       </div>
 
-      <p
+      {/* Big faint logo at the bottom. brightness-0 turns it into a solid dark
+          shape whatever colour the PNG is, then the opacity fades it. */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/skribelogo2.png"
+        alt=""
         aria-hidden
-        className={`${serif.className} pointer-events-none -mb-[3.5vw] select-none text-center text-[26vw] font-normal leading-[0.8] tracking-[-0.04em] text-[#15130F]/[0.06]`}
-      >
-        Skribe
-      </p>
+        draggable={false}
+        className="pointer-events-none mx-auto -mb-[3.5vw] block h-auto w-[78vw] max-w-none select-none brightness-0 opacity-[0.06]"
+      />
     </footer>
   );
 }

@@ -15,7 +15,7 @@ export const metadata: Metadata = pageMeta({
 
 // PLACEHOLDER details: replace with your real ones.
 const ways: { icon: IconName; color: string; title: string; text: string; value: string; href: string }[] = [
-  { icon: "mail", color: C.indigo, title: "Email", text: "For anything, any time.", value: "support@skribe.app", href: "mailto:support@skribe.app" },
+  { icon: "mail", color: C.indigo, title: "Email", text: "For anything, any time.", value: "skribesubscribers@gmail.com", href: "mailto:skribesubscribers@gmail.com" },
   { icon: "chat", color: C.teal, title: "In the app", text: "Open Profile, then Help.", value: "Fastest for payment issues", href: "#" },
 ];
 
@@ -37,9 +37,9 @@ export default function ContactPage() {
 
       <section className={`${sectionPad} pb-28 md:pb-36`}>
         <div className={`${container} grid gap-12 lg:grid-cols-[1.2fr_0.8fr] lg:gap-16`}>
-          <Reveal>
+          {/* <Reveal>
             <ContactForm />
-          </Reveal>
+          </Reveal> */}
 
           <Reveal delay={0.05}>
             <p className={`${mono.className} mb-6 text-xs uppercase tracking-[0.16em] text-[#15130F]/55`}>Other ways to reach us</p>

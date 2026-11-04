@@ -3,6 +3,7 @@
 // Interactive copy of the app's Card tab. Same pieces, same wording:
 // card, Available balance, Top up / Card details, Controls (Freeze card,
 // Unrecognised charges Block / Allow), Recent charges with decline reasons.
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { C, money, mono, serif } from "../../components/site/theme";
 import { Btn, ICONS, Tile, Toggle } from "../../components/site/ui";
@@ -17,17 +18,33 @@ type Charge = {
   reason?: string;
 };
 
+// Logo images live directly in /public (e.g. public/netflix.png).
+// Merchants not listed here get a letter tile instead of an image.
+const LOGOS: Record<string, string> = {
+  Netflix: "/netflix.png",
+  Spotify: "/spotify.png",
+  "Adobe CC": "/adobe.png",
+  ChatGPT: "/chatgpt.png",
+  "Apple Music": "/apple-music.png",
+  "YouTube Premium": "/youtube-premium.png",
+};
+
 const initial: Charge[] = [
-  { id: 3, merchant: "Netflix", amount: 5500, when: "4 Dec · 9:41 AM", ok: true },
-  { id: 2, merchant: "Spotify", amount: 1300, when: "3 Dec · 6:02 PM", ok: true },
+  { id: 6, merchant: "ChatGPT", amount: 30000, when: "5 Dec · 10:20 AM", ok: true },
+  { id: 5, merchant: "Netflix", amount: 5500, when: "4 Dec · 9:41 AM", ok: true },
+  { id: 4, merchant: "Apple Music", amount: 1200, when: "4 Dec · 7:05 AM", ok: true },
+  { id: 3, merchant: "Spotify", amount: 1300, when: "3 Dec · 6:02 PM", ok: true },
+  { id: 2, merchant: "YouTube Premium", amount: 2500, when: "2 Dec · 12:30 PM", ok: true },
   { id: 1, merchant: "Adobe CC", amount: 16000, when: "1 Dec · 8:15 AM", ok: false, reason: "Not enough balance" },
 ];
 
 const queue = [
-  { merchant: "Unknown merchant", amount: 3200, known: false },
   { merchant: "Spotify", amount: 1300, known: true },
+  { merchant: "ChatGPT", amount: 30000, known: true },
+  { merchant: "Brightpay Online", amount: 900, known: false },
+  { merchant: "Apple Music", amount: 1200, known: true },
   { merchant: "Netflix", amount: 5500, known: true },
-  { merchant: "Unknown merchant", amount: 900, known: false },
+  { merchant: "YouTube Premium", amount: 2500, known: true },
 ];
 
 const card = "rounded-3xl border border-[#15130F]/15 bg-[#FFFDF8]";
@@ -63,7 +80,9 @@ export function CardDemo() {
       reason = "Not enough balance";
     }
     if (ok) setBalance((b) => b - q.amount);
-    setCharges((c) => [{ id: Date.now(), merchant: q.merchant, amount: q.amount, when: "Just now", ok, reason }, ...c].slice(0, 6));
+    setCharges((c) =>
+      [{ id: Date.now(), merchant: q.merchant, amount: q.amount, when: "Just now", ok, reason }, ...c].slice(0, 8),
+    );
     setN((x) => x + 1);
   }
 
@@ -154,7 +173,7 @@ export function CardDemo() {
         <ul className="divide-y divide-dotted divide-[#15130F]/25">
           {charges.map((c) => (
             <li key={c.id} className="flex items-center gap-4 py-4">
-              <Tile icon={c.ok ? "card" : "shield"} color={c.ok ? C.teal : C.mutedRed} />
+              <MerchantLogo name={c.merchant} ok={c.ok} />
               <div className="min-w-0 flex-1">
                 <p className="truncate font-semibold">{c.merchant}</p>
                 <p className="text-sm text-[#15130F]/60">{c.ok ? c.when : `${c.reason} · ${c.when}`}</p>
@@ -194,6 +213,30 @@ export function CardDemo() {
         </div>
       ) : null}
     </div>
+  );
+}
+
+function MerchantLogo({ name, ok }: { name: string; ok: boolean }) {
+  const src = LOGOS[name];
+  if (src) {
+    return (
+      <Image
+        src={src}
+        alt={`${name} logo`}
+        width={40}
+        height={40}
+        className={`h-10 w-10 shrink-0 rounded-xl border border-[#15130F]/15 bg-white object-contain p-1.5 ${ok ? "" : "opacity-60"}`}
+      />
+    );
+  }
+  return (
+    <span
+      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-[#15130F]/15 text-sm font-semibold"
+      style={{ backgroundColor: `${C.mutedRed}14`, color: C.mutedRed }}
+      aria-hidden="true"
+    >
+      {name.charAt(0)}
+    </span>
   );
 }
 

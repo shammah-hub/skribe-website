@@ -3,6 +3,7 @@
 import { C } from "./theme";
 import type { IconName } from "./ui";
 
+// Demo data only. Label it "Example" wherever it is shown in the UI.
 export const subs = [
   { name: "Netflix", image: "/netflix.png", amount: 5500, next: "Dec 15" },
   { name: "Spotify", image: "/spotify.png", amount: 1300, next: "Dec 10" },
@@ -29,8 +30,8 @@ export const services: [string, string][] = [
 export type Step = { title: string; text: string; tag: string; icon: IconName; color: string };
 
 export const steps: Step[] = [
-  { title: "Connect your bank", text: "Securely link your account with bank-level encryption. Read-only, always.", tag: "~1 min", icon: "shield", color: C.indigo },
-  { title: "We find the repeats", text: "Skribe spots the recurring payments hiding in your transactions and lists them.", tag: "automatic", icon: "sparkles", color: C.teal },
+  { title: "Get your Skribe card", text: "Verify your identity and your card appears in the app. Fund it and use it for your subscriptions.", tag: "in the app", icon: "shield", color: C.indigo },
+  { title: "We find the repeats", text: "Skribe matches card charges to subscriptions and asks when it isn't sure.", tag: "automatic", icon: "sparkles", color: C.teal },
   { title: "See what's coming", text: "Spending patterns and upcoming charges, laid out before they land.", tag: "always on", icon: "chart", color: C.amber },
   { title: "Handle it in one tap", text: "Cancel, pause or update a subscription without calling anyone.", tag: "~5 sec", icon: "zap", color: C.green },
 ];
@@ -38,12 +39,12 @@ export const steps: Step[] = [
 export type Feature = { title: string; text: string; icon: IconName; color: string };
 
 export const smallFeatures: Feature[] = [
-  { title: "Auto-detect subscriptions", text: "Finds every recurring payment across your accounts.", icon: "sparkles", color: C.indigo },
-  { title: "Bank-level security", text: "256-bit encryption, end to end.", icon: "shield", color: C.green },
+  { title: "Auto-detect subscriptions", text: "Spots the recurring charges on your Skribe card.", icon: "sparkles", color: C.indigo },
+  { title: "Secure by design", text: "Your data is encrypted, and card details stay hidden until you reveal them.", icon: "shield", color: C.green },
   { title: "Spending insights", text: "Clear charts and tips to spend less.", icon: "chart", color: C.mutedRed },
   { title: "One-tap cancellation", text: "Cancel from the app in seconds.", icon: "zap", color: C.red },
-  { title: "Price change alerts", text: "Know the moment a price or term changes.", icon: "dollar", color: C.amber },
-  { title: "Multi-currency", text: "Track in any currency, converted for you.", icon: "globe", color: C.teal },
+  { title: "Price change flags", text: "Skribe flags it when a recurring charge goes up.", icon: "dollar", color: C.amber },
+  { title: "Naira and dollar cards", text: "Pay local and international subscriptions from one app.", icon: "globe", color: C.teal },
 ];
 
 export const billFeatures: Feature[] = [
@@ -53,72 +54,67 @@ export const billFeatures: Feature[] = [
   { title: "Send money", text: "Move money to other people instantly.", icon: "send", color: C.green },
 ];
 
+// Only facts that are true at launch. Swap in real numbers (e.g. waitlist count) once they exist.
 export const stats = [
-  { value: "5K+", label: "Active users", color: C.red },
-  { value: "₦2M+", label: "Saved by users", color: C.green },
-  { value: "5K+", label: "Subscriptions tracked", color: C.indigo },
-  { value: "4.9", label: "Average rating", color: C.amber },
+  { value: "₦0", label: "To start, free plan", color: C.green },
+  { value: "1 tap", label: "To freeze your card", color: C.teal },
+  { value: "Hidden", label: "Card details until you reveal them", color: C.indigo },
+  { value: "₦ + $", label: "Naira and dollar cards", color: C.amber },
 ];
 
 export const plans = [
   {
-    name: "Basic",
-    monthly: "$4.99",
-    yearly: "$47.99",
-    text: "For individuals just getting started.",
-    features: ["Track up to 10 subscriptions", "Basic spending insights", "Email notifications", "Mobile app access", "Standard support"],
+    name: "Free",
+    monthly: "₦0",
+    yearly: "₦0",
+    text: "Track one subscription by hand.",
+    features: ["Track 1 subscription manually", "Renewal reminder for it", "Mobile app access"],
     popular: false,
   },
   {
-    name: "Pro",
-    monthly: "$9.99",
-    yearly: "$95.99",
-    text: "For power users who want it all.",
-    features: ["Unlimited subscriptions", "Advanced analytics & insights", "Skribe virtual card", "Priority notifications", "One-click cancellation", "Price change alerts", "Multi-currency support", "Priority support"],
+    name: "Premium",
+    monthly: "₦2,000",
+    yearly: "₦19,200",
+    text: "See every subscription and where your money goes.",
+    features: [
+      "Unlimited subscriptions",
+      "Detailed spending statistics",
+      "Spend by merchant and by month",
+      "Renewal reminders for all of them",
+      "Mobile app access",
+    ],
     popular: true,
   },
-  {
-    name: "Enterprise",
-    monthly: "$19.99",
-    yearly: "$191.99",
-    text: "For teams and businesses.",
-    features: ["Everything in Pro", "Team management (up to 10 users)", "Centralized billing", "Custom spending limits", "API access", "Dedicated account manager", "Custom integrations", "24/7 phone support"],
-    popular: false,
-  },
 ];
 
-export const compare: { feature: string; basic: boolean | string; pro: boolean | string; ent: boolean | string }[] = [
-  { feature: "Subscription tracking", basic: "10", pro: "Unlimited", ent: "Unlimited" },
-  { feature: "Spending insights", basic: true, pro: true, ent: true },
-  { feature: "Skribe virtual card", basic: false, pro: true, ent: true },
-  { feature: "Price alerts", basic: false, pro: true, ent: true },
-  { feature: "One-click cancel", basic: false, pro: true, ent: true },
-  { feature: "Team management", basic: false, pro: false, ent: true },
-  { feature: "API access", basic: false, pro: false, ent: true },
-  { feature: "Priority support", basic: false, pro: true, ent: true },
+export const compare: { feature: string; free: boolean | string; premium: boolean | string; card: boolean | string }[] = [
+  { feature: "Subscriptions you can track", free: "1", premium: "Unlimited", card: "Unlimited" },
+  { feature: "Renewal reminders", free: "1 subscription", premium: "All", card: "All" },
+  { feature: "Spending statistics", free: false, premium: true, card: true },
+  { feature: "Spend by merchant", free: false, premium: true, card: true },
+  { feature: "Monthly spending breakdown", free: false, premium: true, card: true },
+  { feature: "Trends over time", free: false, premium: true, card: true },
 ];
 
-export const testimonials = [
-  { quote: "Skribe saved me from unexpected Netflix debits. Finally, all my subscriptions in one place.", author: "Sarah Chen", role: "Product Designer", image: "/a.jpg", tape: C.amber },
-  { quote: "The virtual card is genius. Full control over what can charge it, and I can freeze it in a tap.", author: "Marcus Rodriguez", role: "Software Engineer", image: "/b.jpg", tape: C.teal },
-  { quote: "It pays for itself. I cancelled 5 subscriptions I had completely forgotten about.", author: "Emma Thompson", role: "Marketing Manager", image: "/c.jpg", tape: C.indigo },
-  { quote: "As a freelancer with tons of tools, Skribe keeps me organised and helps me budget.", author: "James Wilson", role: "Freelance Designer", image: "/d.jpg", tape: C.green },
-  { quote: "Got notified when Adobe raised its price and switched plans. Saved me $40 a month.", author: "Lisa Park", role: "Photographer", image: "/e.jpg", tape: C.red },
-  { quote: "Managing our team's subscriptions was a nightmare. Now it's one list and we save every month.", author: "David Kumar", role: "Startup Founder", image: "/r.jpg", tape: C.amber },
-];
+// Empty until real users have given real feedback. Typed so the array isn't inferred as never[].
+export type Testimonial = { quote: string; author: string; role: string; image: string; tape: string };
+export const testimonials: Testimonial[] = [];
 
 export const faqs = [
-  { q: "How does Skribe detect my subscriptions?", a: "Skribe analyses your bank transactions and identifies recurring payments. We look at amounts, merchant names and billing cycles, so you never have to enter anything by hand." },
-  { q: "Is my financial data secure?", a: "Yes. We use 256-bit encryption for all data in transit and at rest. Your credentials are never stored on our servers; we use read-only access through secure banking APIs." },
+  { q: "How does Skribe detect my subscriptions?", a: "Skribe matches the charges on your Skribe card to subscriptions and adds well-known services for you. When it isn't sure, it asks, and remembers your answer." },
+  { q: "Is my financial data secure?", a: "Yes. Your data is encrypted in transit and at rest, and card details stay hidden until you reveal them. Skribe doesn't read your contacts, text messages or other banking apps." },
   { q: "What is the Skribe virtual card?", a: "It's a card you fund from inside the app and use to pay for subscriptions. You can freeze it in a tap, block merchants Skribe doesn't recognise, and see exactly why any charge was declined." },
-  { q: "Do you support international subscriptions?", a: "Yes. Skribe supports over 150 currencies, converts everything to your preferred currency and tracks exchange-rate changes for you." },
-  { q: "What happens if a subscription increases its price?", a: "You get a notification before the new price takes effect, with the old and new price side by side, so you can accept, negotiate or cancel." },
-  { q: "Can I use Skribe for my business subscriptions?", a: "Yes. Pro and Enterprise suit freelancers and teams: track team subscriptions, set approval workflows and export expense reports." },
+  { q: "Which currencies does Skribe support?", a: "At launch, Skribe supports naira (₦) and US dollars ($). Get a naira card for local subscriptions and a dollar card for services that bill in dollars. More currencies may come later." },
+  { q: "When do I need the dollar card?", a: "Use it for services that charge in dollars, like ChatGPT, Figma, Notion or Canva. Netflix, DStv and other services that accept Nigerian cards can go on your naira card." },
+  { q: "Will Skribe tell me if a subscription's price changes?", a: "Skribe flags it when a recurring charge comes in higher than before, so you can decide whether to keep it, switch plans or cancel." },
+  { q: "Can I use Skribe for my business or team?", a: "Skribe is built for personal use right now. Team and business features may come later." },
+  { q: "Is Premium free if I use the Skribe card?", a: "Yes. Pay your subscriptions with your Skribe card and every Premium feature is included, with no plan to buy." },
 ];
 
 export const cardFaqs = [
   { q: "Who can get a Skribe card?", a: "Once you finish identity verification in your Profile, your Skribe card appears in the app. There's nothing to apply for separately." },
-  { q: "How do I add money to the card?", a: "Top up your card balance from inside the app. The card only ever spends what you've put on it, so a surprise charge can't reach your main account." },
+  { q: "Naira card or dollar card?", a: "Skribe offers both at launch. Use the naira card for subscriptions that bill in naira and the dollar card for services that bill in dollars." },
+  { q: "How do I fund my Skribe card?", a: "Send money by bank transfer to the account number in your Skribe app. Once it arrives, it's in your balance and ready to spend with your card." },
   { q: "What does freezing do?", a: "Every charge is declined until you turn the freeze off. It takes one tap, and the card shows a frosted overlay so you can see it's frozen." },
   { q: "What are unrecognised charges?", a: "Merchants Skribe doesn't recognise. By default they're blocked. If you'd rather allow them, you can switch to Allow, and we'll ask you to confirm first." },
   { q: "Why was a charge declined?", a: "Skribe tells you in plain words: billing was off, the card was frozen, not enough balance, an unrecognised merchant, or an unclear amount." },

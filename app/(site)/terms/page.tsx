@@ -9,9 +9,15 @@ export const metadata: Metadata = pageMeta({
   path: "/terms",
 });
 
-// Copy comes from Skribe_Terms_and_Conditions.pdf. Anything in [SQUARE BRACKETS] is
-// highlighted on the page until you replace it. Use **double asterisks** for bold.
-const meta = "Effective date: [DATE] · Version 1.0 · Operated by [COMPANY LEGAL NAME]";
+// Company details (from the CAC status report of 27 October 2026).
+// Anything left in [SQUARE BRACKETS] is highlighted on the page until you replace it.
+const companyLegalName = "SKRIBESUB TECHNOLOGIES LIMITED";
+const companyAddress = "Plot 4418, Cadestrial Zone, Guzape, Abuja, FCT, Nigeria";
+const supportEmail = "skribesubscribers@gmail.com";
+const effectiveDate = "27 October 2026";
+
+// Use **double asterisks** for bold.
+const meta = `Effective date: ${effectiveDate} · Version 1.0 · Operated by ${companyLegalName}`;
 
 const summary = [
   "Skribe helps you control subscription payments with a virtual card and a balance.",
@@ -28,7 +34,7 @@ const sections: Section[] = [
   {
     title: "About these terms",
     blocks: [
-      "These terms are an agreement between you and [COMPANY LEGAL NAME] (“Skribe”, “we”, “us”). They include our Privacy Policy. By creating an account or using Skribe you accept them. If you do not accept them, please do not use Skribe.",
+      `These terms are an agreement between you and ${companyLegalName} (“Skribe”, “we”, “us”). They include our Privacy Policy. By creating an account or using Skribe you accept them. If you do not accept them, please do not use Skribe.`,
     ],
   },
   {
@@ -38,7 +44,7 @@ const sections: Section[] = [
       {
         list: [
           "be at least 18 years old",
-          "live in Nigeria [CONFIRM WHERE YOU OPERATE]",
+          "live in Nigeria",
           "have a valid Bank Verification Number (BVN)",
           "give us true and complete information, and keep it up to date",
           "open only one account, for yourself",
@@ -51,7 +57,7 @@ const sections: Section[] = [
     title: "What Skribe is, and is not",
     blocks: [
       "Skribe gives you tools to track subscriptions, get alerts, pay online with a virtual card, hold a balance, pay bills and send money.",
-      "Skribe is not a bank. Services that involve money are provided with licensed partners, currently [SUDO AFRICA] for card issuing and [SAFE HAVEN MICROFINANCE BANK] for banking. [ADD SKRIBE’S OWN REGULATORY STATUS, AS CONFIRMED BY YOUR LAWYER.] Your balance is not a bank deposit, earns no interest, and may not be covered by deposit insurance. [CONFIRM.]",
+      "Skribe is not a bank. Accounts and cards are provided through licensed partners, currently Sudo Africa for card issuing and Safe Haven Microfinance Bank for banking. Your use of those services is also subject to their terms. Skribe does not pay interest on your balance.",
     ],
   },
   {
@@ -95,10 +101,10 @@ const sections: Section[] = [
     blocks: [
       {
         list: [
-          "Your Skribe card is a virtual card for online payments. [CONFIRM: IT CANNOT BE USED AT ATMS OR IN SHOPS.] Today it is a naira card; the card brand and currencies may change.",
+          "Your Skribe card is a virtual card for online payments.",
           "We cannot promise that every merchant will accept it. Acceptance, especially outside Nigeria, varies, and some merchants ask for extra verification.",
           "Every charge is checked in real time. We approve it only if your card is not frozen, the subscription switch for that merchant is not off, your unrecognised-charge rule allows it, and your balance covers it.",
-          "**Unrecognised charges:** your card can be set to allow or block charges from merchants Skribe does not recognise yet. You can change this any time in the Card tab. [CONFIRM THE DEFAULT SETTING.]",
+          "**Unrecognised charges:** your card can be set to allow or block charges from merchants Skribe does not recognise yet. You can change this any time in the Card tab.",
           "**Foreign currency:** charges in another currency are converted by our card provider at its rate, so the naira amount may differ from the merchant’s price.",
           "You can see your full card number and CVV in the app. Keep them private. If they may have been exposed, freeze the card and contact us. We may cancel and replace a card at any time for security.",
         ],
@@ -140,9 +146,9 @@ const sections: Section[] = [
     blocks: [
       {
         list: [
-          "You may pay a card creation fee, a Skribe fee on card charges, the card provider’s fee and VAT on each charge, fees on bill purchases and transfers, and currency conversion costs. [LIST YOUR REAL FEES HERE.]",
+          "You may pay a card creation fee, a Skribe fee on card charges, the card provider’s fee and VAT on each charge, fees on bill purchases and transfers, and currency conversion costs.",
           "We show fees before you confirm a payment, or in the transaction details.",
-          "We will give you [30 DAYS’] notice before changing fees. Changes apply to future transactions.",
+          "We will give you 30 DAYS’ notice before changing fees. Changes apply to future transactions.",
           "Merchants and banks may charge you separately. We do not control those charges.",
         ],
       },
@@ -153,8 +159,8 @@ const sections: Section[] = [
     blocks: [
       {
         list: [
-          "If you see a charge you do not recognise, freeze your card and contact [SUPPORT EMAIL] straight away, with the date, merchant and amount.",
-          "We will look into it with our partners and update you within [TIMEFRAME].",
+          `If you see a charge you do not recognise, freeze your card and contact ${supportEmail} or directly chat with support from Skribe APP straight away, with the date, merchant and amount.`,
+          "We will look into it with our partners and update you within 5 Working Days.",
           "If we find the charge was unauthorised and not your fault, we will refund it. We will not refund if you shared your PIN, card details or sign-in, or acted fraudulently.",
           "For disputes about goods or services, contact the merchant first. Our ability to recover money from a merchant is limited.",
         ],
@@ -172,7 +178,6 @@ const sections: Section[] = [
           "share your account, PIN or card with anyone",
           "try to bypass limits, controls or security",
           "copy, reverse engineer or disrupt the app",
-          "use Skribe for [ADD ANY RESTRICTED CATEGORIES]",
         ],
       },
     ],
@@ -222,19 +227,19 @@ const sections: Section[] = [
   {
     title: "Changes to these terms",
     blocks: [
-      "If we make important changes, we will tell you at least [30 DAYS] before they take effect. If you keep using Skribe afterwards you accept the changes. If you do not agree, you can close your account.",
+      "If we make important changes, we will tell you at least 30 DAYS before they take effect. If you keep using Skribe afterwards you accept the changes. If you do not agree, you can close your account.",
     ],
   },
   {
     title: "Complaints",
     blocks: [
-      "Contact us first at [SUPPORT EMAIL]. We will reply within [TIMEFRAME]. If we cannot resolve it, you may take your complaint to the relevant regulator, such as the Central Bank of Nigeria or the Federal Competition and Consumer Protection Commission. [CONFIRM.]",
+      `Contact us first by chatting with a support directly in Skribe APP or at ${supportEmail}. We will reply within 24Hours. If we cannot resolve it, you may take your complaint to the relevant regulator, such as the Central Bank of Nigeria or the Federal Competition and Consumer Protection Commission.`,
     ],
   },
   {
     title: "Governing law",
     blocks: [
-      "These terms are governed by the laws of the Federal Republic of Nigeria. We will try to resolve any dispute fairly and in good faith first. If that fails, [MEDIATION / ARBITRATION / THE COURTS OF LAGOS OR ABUJA] will decide it. [CONFIRM.]",
+      "These terms are governed by the laws of the Federal Republic of Nigeria. We will try to resolve any dispute fairly and in good faith first. If that fails, MEDIATION / ARBITRATION / THE COURTS OF LAGOS OR ABUJA will decide it.",
     ],
   },
   {
@@ -245,7 +250,7 @@ const sections: Section[] = [
   },
   {
     title: "Contact us",
-    blocks: ["Skribe — [COMPANY LEGAL NAME]", "Email: [SUPPORT EMAIL]", "Address: [ADDRESS]"],
+    blocks: [`Skribe — ${companyLegalName}`, `Email: ${supportEmail}`, `Address: ${companyAddress}`],
   },
 ];
 

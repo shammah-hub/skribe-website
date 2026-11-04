@@ -29,7 +29,7 @@ export default function HomePage() {
         <div className={`${container} grid items-center gap-16 lg:grid-cols-[1.15fr_0.85fr] lg:gap-12`}>
           <div>
             <p className={`${mono.className} text-xs uppercase tracking-[0.16em] text-[#15130F]/60`}>
-              Smart subscription banking
+              Subscriptions, cards and payments
             </p>
             <h1 className={`${h1} mt-6`}>
               Every subscription, <Underlined>written down.</Underlined>
@@ -48,7 +48,7 @@ export default function HomePage() {
                 See how it works
               </Btn>
             </div>
-            <div className="mt-10 flex items-center gap-4">
+            {/* <div className="mt-10 flex items-center gap-4">
               <div className="flex -space-x-2">
                 {["/a.jpg", "/b.jpg", "/c.jpg", "/d.jpg"].map((src) => (
                   <Image key={src} src={src} alt="" width={32} height={32} className="h-8 w-8 rounded-full border-2 border-[#F4EFE6] object-cover" />
@@ -57,7 +57,7 @@ export default function HomePage() {
               <p className="text-sm text-[#15130F]/70">
                 <span className="font-semibold text-[#15130F]">5,000+</span> people track their subscriptions with Skribe
               </p>
-            </div>
+            </div> */}
           </div>
           <Receipt />
         </div>

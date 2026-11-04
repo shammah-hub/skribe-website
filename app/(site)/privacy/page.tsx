@@ -9,9 +9,18 @@ export const metadata: Metadata = pageMeta({
   path: "/privacy",
 });
 
-// Copy comes from Skribe_Privacy_Policy.pdf. Anything in [SQUARE BRACKETS] is
-// highlighted on the page until you replace it. Use **double asterisks** for bold.
-const meta = "Effective date: [DATE] · Version 1.0 · Operated by [COMPANY LEGAL NAME]";
+// Company details (from the CAC status report of 27 October 2026).
+// Anything left in [SQUARE BRACKETS] is highlighted on the page until you replace it.
+const companyLegalName = "SKRIBESUB TECHNOLOGIES LIMITED";
+const rcNumber = "9966276";
+const companyAddress = "Plot 4418, Cadestrial Zone, Guzape, Abuja, FCT, Nigeria";
+const privacyEmail = "skribesubscribers@gmail.com";
+const supportEmail = "skribesubscribers@gmail.com";
+const dpoName = "[NAME]"; // name of the person responsible for data protection
+const effectiveDate = "27 October 2026";
+
+// Use **double asterisks** for bold.
+const meta = `Effective date: ${effectiveDate} · Version 1.0 · Operated by ${companyLegalName}`;
 
 const summary = [
   "We collect only what we need to run your account, verify who you are, issue your card and process your payments.",
@@ -19,7 +28,7 @@ const summary = [
   "Your Skribe PIN is stored only in scrambled form. We cannot read it.",
   "Your full card number and CVV are shown through our card provider’s secure display. We do not store them.",
   "We keep financial and identity records for as long as the law requires.",
-  "You can ask to see, correct or delete your data at any time by emailing [PRIVACY EMAIL].",
+  `You can ask to see, correct or delete your data at any time by emailing ${privacyEmail}.`,
   "Skribe is for people aged 18 and over.",
 ];
 
@@ -27,10 +36,10 @@ const sections: Section[] = [
   {
     title: "Who we are",
     blocks: [
-      "This policy explains how [COMPANY LEGAL NAME] (“Skribe”, “we”, “us”) collects, uses, shares and protects your personal data when you use the Skribe app and related services. We are the data controller under the Nigeria Data Protection Act 2023 (the “NDPA”).",
-      "Registered address: [ADDRESS]",
-      "Company registration (RC) number: [CAC NUMBER]",
-      "Data Protection Officer: [NAME], [PRIVACY EMAIL]",
+      `This policy explains how ${companyLegalName} (“Skribe”, “we”, “us”) collects, uses, shares and protects your personal data when you use the Skribe app and related services. We are the data controller under the Nigeria Data Protection Act 2023 (the “NDPA”).`,
+      `Registered address: ${companyAddress}`,
+      `Company registration (RC) number: ${rcNumber}`,
+      `Data Protection Officer: ${dpoName}, ${privacyEmail}`,
     ],
   },
   {
@@ -65,7 +74,7 @@ const sections: Section[] = [
       },
       { sub: "Information from others" },
       { list: ["Verification and fraud-screening results from our card provider and banking partners."] },
-      "We do not read your contacts, text messages or other banking apps. [CONFIRM. UPDATE THIS IF YOU ADD BANK LINKING.]",
+      "We do not read your contacts, text messages or other banking apps.",
     ],
   },
   {
@@ -82,7 +91,7 @@ const sections: Section[] = [
           "**To market to you (consent only):** we only send marketing if you agree, and you can opt out at any time.",
         ],
       },
-      "**Automated decisions.** Card charges are approved or declined automatically using rules you control (freeze, subscription switches, the unrecognised-charge rule) and your balance. If you think a decision was wrong, email [SUPPORT EMAIL] and a person will review it.",
+      `**Automated decisions.** Card charges are approved or declined automatically using rules you control (freeze, subscription switches, the unrecognised-charge rule) and your balance. If you think a decision was wrong, email ${supportEmail} and a person will review it.`,
     ],
   },
   {
@@ -90,7 +99,7 @@ const sections: Section[] = [
     blocks: [
       {
         list: [
-          "Our card issuing and banking partners, currently [SUDO AFRICA] and [SAFE HAVEN MICROFINANCE BANK], so they can verify you, issue your card, hold funds, authorise charges, and pay bills and transfers. [CONFIRM PARTNER NAMES.]",
+          "Our card issuing and banking partners, currently SUDO AFRICA and SAFE HAVEN MICROFINANCE BANK, so they can verify you, issue your card, hold funds, authorise charges, and pay bills and transfers.",
           "Merchants and payment networks, when you pay with your card. They receive the card details you give them and the payment information.",
           "Bill and transfer providers, who receive only what is needed to complete the payment, such as a phone, meter or smartcard number, or the recipient’s account details.",
           "Technology providers, such as Google Firebase and Google Cloud, which host our app, database, sign-in and notifications for us.",
@@ -105,7 +114,7 @@ const sections: Section[] = [
   {
     title: "Your BVN",
     blocks: [
-      "We use your BVN only to verify your identity and meet legal requirements. It is sent securely to our card provider for verification and we do not store it in our own database. [CONFIRM.] Our providers keep it under their own policies. We never show your BVN to other users.",
+      "We use your BVN only to verify your identity and meet legal requirements. It is sent securely to our card provider for verification and we do not store it in our own database. Our providers keep it under their own policies. We never show your BVN to other users.",
     ],
   },
   {
@@ -156,7 +165,7 @@ const sections: Section[] = [
           "complain to the Nigeria Data Protection Commission (NDPC) at ndpc.gov.ng",
         ],
       },
-      "To use any of these rights, email [PRIVACY EMAIL]. We may ask you to confirm your identity first, and we will reply within [30 DAYS].",
+      `To use any of these rights, email ${privacyEmail}. We may ask you to confirm your identity first, and we will reply within 30 DAYS.`,
     ],
   },
   {
@@ -191,7 +200,7 @@ const sections: Section[] = [
   },
   {
     title: "Contact us",
-    blocks: ["Skribe — [COMPANY LEGAL NAME]", "Email: [PRIVACY EMAIL]", "Address: [ADDRESS]"],
+    blocks: [`Skribe — ${companyLegalName}`, `Email: ${privacyEmail}`, `Address: ${companyAddress}`],
   },
 ];
 

@@ -25,7 +25,7 @@ export function PricingClient() {
         </div>
       </Reveal>
 
-      <div className="grid items-stretch gap-6 md:grid-cols-3">
+      <div className="mx-auto grid max-w-4xl items-stretch gap-6 md:grid-cols-2">
         {plans.map((p, i) => (
           <Reveal key={p.name} delay={i * 0.05} className="h-full">
             <div
@@ -52,7 +52,12 @@ export function PricingClient() {
                   </li>
                 ))}
               </ul>
-              <Btn waitlist variant={p.popular ? "light" : "dark"} className="mt-8">
+              {p.popular ? (
+                <p className={`${mono.className} mt-8 text-center text-[11px] uppercase tracking-[0.12em] text-[#F4EFE6]/60`}>
+                  Free when you use the Skribe card
+                </p>
+              ) : null}
+              <Btn waitlist variant={p.popular ? "light" : "dark"} className={`${p.popular ? "mt-3" : "mt-8"} min-h-14 w-full`}>
                 Join waitlist
               </Btn>
             </div>
@@ -60,25 +65,47 @@ export function PricingClient() {
         ))}
       </div>
 
-      <Reveal className="mt-20">
-        <h3 className={`${serif.className} mb-6 text-3xl font-normal tracking-tight`}>Compare all features</h3>
-        <div className="overflow-x-auto rounded-3xl border border-[#15130F]/20 bg-[#FFFDF8]">
-          <table className="w-full min-w-[560px] text-sm">
+      <Reveal className="mx-auto mt-16 max-w-4xl">
+        <div className="relative rounded-3xl border-2 border-dashed border-[#15130F]/40 bg-[#FFFDF8] p-8 md:p-12">
+          <div className="grid items-center gap-8 md:grid-cols-[1.4fr_1fr]">
+            <div>
+              <Stamp className="-rotate-2 text-sm">Free with the card</Stamp>
+              <h3 className={`${serif.className} mt-5 text-4xl font-normal leading-tight tracking-tight md:text-5xl`}>
+                Use the Skribe card, and <span className="italic">everything is free.</span>
+              </h3>
+              <p className="mt-4 max-w-md text-[15px] leading-relaxed text-[#15130F]/70">
+                Pay your subscriptions with your Skribe card and every Premium feature is included. Unlimited subscriptions and detailed spending statistics, with no plan to buy.
+              </p>
+            </div>
+            <div className="flex flex-col gap-3">
+              <Btn waitlist variant="dark" className="min-h-16 w-full text-base">
+                Join waitlist
+              </Btn>
+              <p className={`${mono.className} text-center text-xs text-[#15130F]/50`}>Prices may change at launch.</p>
+            </div>
+          </div>
+        </div>
+      </Reveal>
+
+      <Reveal className="mt-16">
+        <h3 className={`${serif.className} mb-6 text-3xl font-normal tracking-tight`}>Compare plans</h3>
+        <div className="mx-auto max-w-4xl overflow-x-auto rounded-3xl border border-[#15130F]/20 bg-[#FFFDF8]">
+          <table className="w-full min-w-[520px] text-sm">
             <thead>
               <tr className={`${mono.className} border-b border-[#15130F]/20 text-left text-xs uppercase tracking-[0.12em]`}>
                 <th className="p-5 font-medium text-[#15130F]/50">Feature</th>
-                <th className="p-5 text-center font-medium">Basic</th>
+                <th className="p-5 text-center font-medium">Free</th>
+                <th className="p-5 text-center font-medium">Premium</th>
                 <th className="p-5 text-center font-medium" style={{ color: C.red }}>
-                  Pro
+                  With Skribe card
                 </th>
-                <th className="p-5 text-center font-medium">Enterprise</th>
               </tr>
             </thead>
             <tbody>
               {compare.map((r) => (
                 <tr key={r.feature} className="border-b border-dotted border-[#15130F]/25 last:border-0">
                   <td className="p-5 text-[#15130F]/80">{r.feature}</td>
-                  {[r.basic, r.pro, r.ent].map((v, i) => (
+                  {[r.free, r.premium, r.card].map((v, i) => (
                     <td key={i} className="p-5 text-center">
                       {typeof v === "boolean" ? (
                         v ? (
