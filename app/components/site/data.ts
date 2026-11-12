@@ -90,10 +90,13 @@ export const plans = [
 export const compare: { feature: string; free: boolean | string; premium: boolean | string; card: boolean | string }[] = [
   { feature: "Subscriptions you can track", free: "1", premium: "Unlimited", card: "Unlimited" },
   { feature: "Renewal reminders", free: "1 subscription", premium: "All", card: "All" },
-  { feature: "Spending statistics", free: false, premium: true, card: true },
+  { feature: "Detailed spending statistics", free: false, premium: true, card: true },
   { feature: "Spend by merchant", free: false, premium: true, card: true },
-  { feature: "Monthly spending breakdown", free: false, premium: true, card: true },
-  { feature: "Trends over time", free: false, premium: true, card: true },
+  { feature: "Spend by month", free: false, premium: true, card: true },
+  { feature: "Pause or block a subscription", free: false, premium: false, card: true },
+  { feature: "Send and receive money", free: true, premium: true, card: true },
+  { feature: "Pay bills and buy airtime", free: true, premium: true, card: true },
+  { feature: "Price", free: "₦0", premium: "₦2,000/mo", card: "₦0" },
 ];
 
 // Empty until real users have given real feedback. Typed so the array isn't inferred as never[].

@@ -3,6 +3,7 @@ import { JsonLd } from "../../components/site/JsonLd";
 import { breadcrumbLd, faqLd, pageMeta } from "../../components/site/seo";
 import { C, container, h2, lead, mono, sectionPad, serif } from "../../components/site/theme";
 import { cardFaqs } from "../../components/site/data";
+import { Check } from "lucide-react";
 import { Btn, CtaBand, Faq, Label, PageHero, Reveal, SectionHead, Tile } from "../../components/site/ui";
 import type { IconName } from "../../components/site/ui";
 import { SkribeCard } from "../../components/site/SkribeCard";
@@ -28,6 +29,29 @@ const controls: { title: string; text: string; icon: IconName; color: string }[]
   { title: "Plain-English declines", text: "No cryptic codes. Skribe says what happened, in words.", icon: "chat", color: C.mutedRed },
 ];
 
+const cardKinds: { name: string; text: string; rows: [string, boolean][] }[] = [
+  {
+    name: "Naira card",
+    text: "For subscriptions you pay in naira. Skribe approves each charge as it happens, so you get the full set of controls.",
+    rows: [
+      ["Freeze in a tap", true],
+      ["Block unrecognised merchants", true],
+      ["Pause or block a subscription", true],
+      ["Plain-English decline reasons", true],
+    ],
+  },
+  {
+    name: "Dollar card",
+    text: "For subscriptions billed in dollars, like Amazon, Microsoft, Google and Dropbox. Fund it from the app and use it anywhere dollars are accepted.",
+    rows: [
+      ["Freeze in a tap", true],
+      ["Block unrecognised merchants", false],
+      ["Pause or block a subscription", false],
+      ["Plain-English decline reasons", false],
+    ],
+  },
+];
+
 const reasons = ["Billing was off", "Card was frozen", "Not enough balance", "Unrecognised merchant", "Amount unclear"];
 
 export default function VirtualCardsPage() {
@@ -45,8 +69,13 @@ export default function VirtualCardsPage() {
         }
         text="Fund your Skribe card from the app and pay for subscriptions without handing out your main account. Freeze it in a tap, and Skribe blocks merchants it doesn't recognise."
         aside={
-          <div className="relative mx-auto w-full max-w-[420px] rotate-2">
-            <SkribeCard />
+          <div className="relative mx-auto w-full max-w-[420px] pt-14">
+            <div className="absolute left-0 top-0 w-[94%] -rotate-3">
+              <SkribeCard variant="dollar" balance={1250} />
+            </div>
+            <div className="relative translate-x-3 rotate-2">
+              <SkribeCard />
+            </div>
             <div className="absolute -bottom-6 -left-4 flex items-center gap-3 rounded-2xl border border-[#15130F]/15 bg-[#FFFDF8] p-3 pr-5 shadow-[0_16px_30px_-18px_rgba(21,19,15,0.5)] sm:-left-8">
               <Tile icon="shield" color={C.amber} />
               <div>
@@ -83,11 +112,49 @@ export default function VirtualCardsPage() {
         </div>
       </section>
 
+      {/* Two cards */}
+      <section className={sectionPad}>
+        <div className={container}>
+          <SectionHead
+            n="03"
+            label="Two cards"
+            color={C.amber}
+            title={
+              <>
+                Naira or dollar, <span className="italic">pick what you pay in.</span>
+              </>
+            }
+          />
+          <div className="grid gap-6 md:grid-cols-2">
+            {cardKinds.map((k, i) => (
+              <Reveal key={k.name} delay={i * 0.05}>
+                <div className="h-full rounded-3xl border border-[#15130F]/20 bg-[#FFFDF8] p-8">
+                  <h3 className={`${serif.className} text-3xl font-normal tracking-tight`}>{k.name}</h3>
+                  <p className="mt-2 leading-relaxed text-[#15130F]/70">{k.text}</p>
+                  <ul className="mt-6 divide-y divide-dotted divide-[#15130F]/25">
+                    {k.rows.map(([label, on]) => (
+                      <li key={label} className="flex items-center justify-between py-3 text-sm">
+                        <span className={on ? "text-[#15130F]/85" : "text-[#15130F]/45"}>{label}</span>
+                        {on ? (
+                          <Check className="h-4 w-4" style={{ color: C.green }} strokeWidth={2.4} />
+                        ) : (
+                          <span className="text-[#15130F]/25">—</span>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* How it works */}
       <section className={`${sectionPad} border-y border-[#15130F]/20 bg-[#EDE7DA]/60`}>
         <div className={container}>
           <SectionHead
-            n="03"
+            n="04"
             label="How it works"
             color={C.teal}
             title={
@@ -117,7 +184,7 @@ export default function VirtualCardsPage() {
       <section className={sectionPad}>
         <div className={container}>
           <SectionHead
-            n="04"
+            n="05"
             label="Controls"
             color={C.indigo}
             title={
@@ -155,7 +222,7 @@ export default function VirtualCardsPage() {
       <section className={`${sectionPad} border-t border-[#15130F]/20`}>
         <div className={`${container} grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20`}>
           <Reveal className="lg:sticky lg:top-28 lg:self-start">
-            <Label n="05" color={C.green}>
+            <Label n="06" color={C.green}>
               Card FAQ
             </Label>
             <h2 className={`${h2} mt-4`}>

@@ -40,20 +40,20 @@ const socials = [
   {
     label: "X",
     glyph: "𝕏",
-    href: "#",
+    href: "https://x.com/Skribesub",
     hover: "hover:border-black hover:bg-black",
   },
   {
     label: "Facebook",
     glyph: "f",
-    href: "#",
+    href: "https://web.facebook.com/profile.php?id=61596466043818",
     hover: "hover:border-[#1877F2] hover:bg-[#1877F2]",
   },
   {
     // Instagram's brand gradient: yellow glow bottom-left, through orange, pink and purple to blue.
     label: "Instagram",
     glyph: "ig",
-    href: "#",
+    href: "https://www.instagram.com/skribe.sub/",
     hover:
       "hover:border-transparent hover:bg-[radial-gradient(circle_at_30%_107%,#fdf497_0%,#fdf497_5%,#fd5949_45%,#d6249f_60%,#285AEB_90%)]",
   },

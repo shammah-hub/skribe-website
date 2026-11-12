@@ -16,7 +16,7 @@ const rcNumber = "9966276";
 const companyAddress = "Plot 4418, Cadestrial Zone, Guzape, Abuja, FCT, Nigeria";
 const privacyEmail = "skribesubscribers@gmail.com";
 const supportEmail = "skribesubscribers@gmail.com";
-const dpoName = "[NAME]"; // name of the person responsible for data protection
+const dpoName = "Shammah Maida"; // person responsible for data protection
 const effectiveDate = "27 October 2026";
 
 // Use **double asterisks** for bold.
@@ -69,7 +69,7 @@ const sections: Section[] = [
       { sub: "Information collected automatically" },
       {
         list: [
-          "A device token so we can send you push notifications, plus basic device and app information and error logs needed for security and troubleshooting. [CONFIRM ANY ANALYTICS TOOLS YOU USE AND LIST THEM HERE.]",
+          "A device token so we can send you push notifications, plus basic device and app information and error logs needed for security and troubleshooting. We use Firebase App Check to confirm that requests come from the genuine Skribe app. We do not use third-party advertising or analytics tools.",
         ],
       },
       { sub: "Information from others" },
@@ -140,8 +140,8 @@ const sections: Section[] = [
     blocks: [
       {
         list: [
-          "Account and profile data: while your account is open, and for [PERIOD] after you close it.",
-          "Identity (KYC) and financial transaction records: for at least [5 YEARS] after your relationship with us ends, as financial regulations require. [CONFIRM WITH YOUR LAWYER.]",
+          "Account and profile data: until you delete your account. When you do, we delete your profile, your subscriptions, your saved merchant choices and your notification tokens, and we remove your sign-in.",
+          "Identity (KYC) and financial transaction records: for at least 5 YEARS after your relationship with us ends, because the Money Laundering (Prevention and Prohibition) Act 2022 requires it. These records stay even after you delete your account.",
           "Notification tokens: until you turn off notifications or log out.",
         ],
       },

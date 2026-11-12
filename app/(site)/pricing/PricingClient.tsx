@@ -65,7 +65,31 @@ export function PricingClient() {
         ))}
       </div>
 
-      <Reveal className="mx-auto mt-16 max-w-4xl">
+      <Reveal className="mx-auto mt-14 max-w-4xl">
+        <div className="rounded-3xl border border-[#15130F]/20 bg-[#FFFDF8] p-8">
+          <p className={`${mono.className} text-xs uppercase tracking-[0.12em] text-[#15130F]/50`}>Every plan includes</p>
+          <h3 className={`${serif.className} mt-2 text-2xl font-normal tracking-tight md:text-3xl`}>
+            Your money, not just your subscriptions.
+          </h3>
+          <ul className="mt-6 grid gap-4 sm:grid-cols-3">
+            {[
+              ["Send money", "Transfer to any Nigerian bank account from your Skribe balance."],
+              ["Receive money", "Get paid into your own Skribe account number."],
+              ["Pay bills", "Airtime, data, electricity and TV, with no extra fees on bills."],
+            ].map(([t, d]) => (
+              <li key={t} className="flex items-start gap-3 text-sm">
+                <Check className="mt-0.5 h-4 w-4 shrink-0" style={{ color: C.green }} strokeWidth={2.4} />
+                <span>
+                  <span className="block font-semibold text-[#15130F]">{t}</span>
+                  <span className="text-[#15130F]/70">{d}</span>
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </Reveal>
+
+      <Reveal className="mx-auto mt-10 max-w-4xl">
         <div className="relative rounded-3xl border-2 border-dashed border-[#15130F]/40 bg-[#FFFDF8] p-8 md:p-12">
           <div className="grid items-center gap-8 md:grid-cols-[1.4fr_1fr]">
             <div>
@@ -74,7 +98,10 @@ export function PricingClient() {
                 Use the Skribe card, and <span className="italic">everything is free.</span>
               </h3>
               <p className="mt-4 max-w-md text-[15px] leading-relaxed text-[#15130F]/70">
-                Pay your subscriptions with your Skribe card and every Premium feature is included. Unlimited subscriptions and detailed spending statistics, with no plan to buy.
+                Pay your subscriptions with your Skribe card and every Premium feature is included, with no plan to buy. You can also pause or block any subscription you pay with the card, right in the app, because Skribe checks each charge the moment it happens.
+              </p>
+              <p className="mt-3 max-w-md text-[13px] leading-relaxed text-[#15130F]/55">
+                Subscriptions you add manually are tracked only, on Free and Premium. Skribe can&apos;t pause or block a payment it doesn&apos;t process.
               </p>
             </div>
             <div className="flex flex-col gap-3">

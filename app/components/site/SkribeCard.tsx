@@ -15,10 +15,11 @@ import { useEffect, useRef, useState, type CSSProperties } from "react";
  * Every size below is the app's logical pixel value converted to `cqw`, so the
  * card scales to whatever width it is given and always looks identical.
  *
- * Needs two files from the app's images/ folder copied into the site's public/ folder:
- *   public/skribecardbackground.png
- *   public/skribecard.png
- * (Without them it falls back to flat red and no logo.)
+ * Needs these files from the app's images/ folder copied into the site's public/ folder:
+ *   public/skribecardbackground.png   (naira card)
+ *   public/dollar_card_bg.png         (dollar card)
+ *   public/skribecard.png             (logo)
+ * (Without them it falls back to a flat colour and no logo.)
  */
 const BASE = 350; // the app's card width in logical px
 // One design pixel = --u. It starts as 1/350 of the card width using container units, and
@@ -32,9 +33,10 @@ export function SkribeCard({
   frozen = false,
   last4 = "4821",
   balance = 24500,
-  currency = "NGN",
+  currency,
   subs = 4,
   className = "",
+  variant = "naira",
 }: {
   frozen?: boolean;
   last4?: string;
@@ -42,10 +44,13 @@ export function SkribeCard({
   currency?: string;
   subs?: number;
   className?: string;
+  variant?: "naira" | "dollar";
   /** Kept so older calls like holder/expiry don't break. */
   holder?: string;
   expiry?: string;
 }) {
+  const dollar = variant === "dollar";
+  const cur = currency ?? (dollar ? "USD" : "NGN");
   const [visible, setVisible] = useState(true);
   const [unit, setUnit] = useState<number | null>(null);
   const box = useRef<HTMLDivElement>(null);
@@ -80,11 +85,11 @@ export function SkribeCard({
         style={{
           aspectRatio: "350 / 164",
           borderRadius: q(15),
-          backgroundColor: "#FF0000",
-          backgroundImage: "url(/skribecardbackground.png)",
+          backgroundColor: dollar ? "#1F3D2B" : "#FF0000",
+          backgroundImage: dollar ? "url(/dollar_card_bg.png)" : "url(/skribecardbackground.png)",
           backgroundSize: "cover",
           backgroundPosition: "center",
-          boxShadow: `${q(15)} ${q(15)} ${q(10)} ${q(-10)} #FFCDD2`,
+          boxShadow: `${q(15)} ${q(15)} ${q(10)} ${q(-10)} ${dollar ? "#C9D8CE" : "#FFCDD2"}`,
           padding: `${q(16)} ${q(20)}`,
         }}
       >
@@ -159,7 +164,7 @@ export function SkribeCard({
                     exit={{ opacity: 0, filter: "blur(8px)" }}
                     transition={{ duration: 0.22 }}
                   >
-                    {visible ? `${currency} ${fmt(balance)}` : "••••••"}
+                    {visible ? `${cur} ${fmt(balance)}` : "••••••"}
                   </motion.p>
                 </AnimatePresence>
               </div>

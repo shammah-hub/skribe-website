@@ -1,9 +1,8 @@
 "use client";
 
-// Interactive copy of the app's Card tab. Same pieces, same wording:
+// Interactive copy of the app's Card tab, for the naira card and the dollar card. Same pieces, same wording:
 // card, Available balance, Top up / Card details, Controls (Freeze card,
 // Unrecognised charges Block / Allow), Recent charges with decline reasons.
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import { C, money, mono, serif } from "../../components/site/theme";
 import { Btn, ICONS, Tile, Toggle } from "../../components/site/ui";
@@ -18,39 +17,53 @@ type Charge = {
   reason?: string;
 };
 
-// Logo images live directly in /public (e.g. public/netflix.png).
-// Merchants not listed here get a letter tile instead of an image.
-const LOGOS: Record<string, string> = {
-  Netflix: "/netflix.png",
-  Spotify: "/spotify.png",
-  "Adobe CC": "/adobe.png",
-  ChatGPT: "/chatgpt.png",
-  "Apple Music": "/apple-music.png",
-  "YouTube Premium": "/youtube-premium.png",
-};
-
 const initial: Charge[] = [
-  { id: 6, merchant: "ChatGPT", amount: 30000, when: "5 Dec · 10:20 AM", ok: true },
-  { id: 5, merchant: "Netflix", amount: 5500, when: "4 Dec · 9:41 AM", ok: true },
-  { id: 4, merchant: "Apple Music", amount: 1200, when: "4 Dec · 7:05 AM", ok: true },
-  { id: 3, merchant: "Spotify", amount: 1300, when: "3 Dec · 6:02 PM", ok: true },
-  { id: 2, merchant: "YouTube Premium", amount: 2500, when: "2 Dec · 12:30 PM", ok: true },
+  { id: 3, merchant: "Netflix", amount: 5500, when: "4 Dec · 9:41 AM", ok: true },
+  { id: 2, merchant: "Spotify", amount: 1300, when: "3 Dec · 6:02 PM", ok: true },
   { id: 1, merchant: "Adobe CC", amount: 16000, when: "1 Dec · 8:15 AM", ok: false, reason: "Not enough balance" },
 ];
 
 const queue = [
+  { merchant: "Unknown merchant", amount: 3200, known: false },
   { merchant: "Spotify", amount: 1300, known: true },
-  { merchant: "ChatGPT", amount: 30000, known: true },
-  { merchant: "Brightpay Online", amount: 900, known: false },
-  { merchant: "Apple Music", amount: 1200, known: true },
   { merchant: "Netflix", amount: 5500, known: true },
-  { merchant: "YouTube Premium", amount: 2500, known: true },
+  { merchant: "Unknown merchant", amount: 900, known: false },
 ];
+
+// Merchant logos live in public/ (netflix.png, spotify.png, ...). Merchants without one fall back to the icon tile.
+const LOGOS: Record<string, string> = {
+  netflix: "/netflix.png",
+  spotify: "/spotify.png",
+  "adobe cc": "/adobe.png",
+  adobe: "/adobe.png",
+  dstv: "/dstv.png",
+  amazon: "/amazon.png",
+  microsoft: "/microsoft.png",
+  google: "/google.png",
+  dropbox: "/dropbox.png",
+};
+
+function MerchantTile({ name, ok }: { name: string; ok: boolean }) {
+  const [failed, setFailed] = useState(false);
+  const src = LOGOS[name.toLowerCase()];
+  if (!src || failed) return <Tile icon={ok ? "card" : "shield"} color={ok ? C.teal : C.mutedRed} />;
+  return (
+    <span className="grid h-11 w-11 shrink-0 place-items-center overflow-hidden rounded-xl border border-[#15130F]/10 bg-white">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={src}
+        alt=""
+        className={`h-7 w-7 object-contain ${ok ? "" : "opacity-50 grayscale"}`}
+        onError={() => setFailed(true)}
+      />
+    </span>
+  );
+}
 
 const card = "rounded-3xl border border-[#15130F]/15 bg-[#FFFDF8]";
 const FULL = "5061 0000 0000 4821";
 
-export function CardDemo() {
+function NairaDemo() {
   const [frozen, setFrozen] = useState(false);
   const [block, setBlock] = useState(true);
   const [balance, setBalance] = useState(48250);
@@ -80,9 +93,7 @@ export function CardDemo() {
       reason = "Not enough balance";
     }
     if (ok) setBalance((b) => b - q.amount);
-    setCharges((c) =>
-      [{ id: Date.now(), merchant: q.merchant, amount: q.amount, when: "Just now", ok, reason }, ...c].slice(0, 8),
-    );
+    setCharges((c) => [{ id: Date.now(), merchant: q.merchant, amount: q.amount, when: "Just now", ok, reason }, ...c].slice(0, 6));
     setN((x) => x + 1);
   }
 
@@ -173,7 +184,7 @@ export function CardDemo() {
         <ul className="divide-y divide-dotted divide-[#15130F]/25">
           {charges.map((c) => (
             <li key={c.id} className="flex items-center gap-4 py-4">
-              <MerchantLogo name={c.merchant} ok={c.ok} />
+              <MerchantTile name={c.merchant} ok={c.ok} />
               <div className="min-w-0 flex-1">
                 <p className="truncate font-semibold">{c.merchant}</p>
                 <p className="text-sm text-[#15130F]/60">{c.ok ? c.when : `${c.reason} · ${c.when}`}</p>
@@ -216,27 +227,146 @@ export function CardDemo() {
   );
 }
 
-function MerchantLogo({ name, ok }: { name: string; ok: boolean }) {
-  const src = LOGOS[name];
-  if (src) {
-    return (
-      <Image
-        src={src}
-        alt={`${name} logo`}
-        width={40}
-        height={40}
-        className={`h-10 w-10 shrink-0 rounded-xl border border-[#15130F]/15 bg-white object-contain p-1.5 ${ok ? "" : "opacity-60"}`}
-      />
+const usd = (n: number) => "$" + n.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+const usdInitial: Charge[] = [
+  { id: 3, merchant: "Amazon", amount: 14.99, when: "4 Dec · 9:41 AM", ok: true },
+  { id: 2, merchant: "Dropbox", amount: 11.99, when: "3 Dec · 6:02 PM", ok: true },
+  { id: 1, merchant: "Microsoft", amount: 9.99, when: "1 Dec · 8:15 AM", ok: true },
+];
+
+const usdQueue = [
+  { merchant: "Google", amount: 9.99 },
+  { merchant: "Amazon", amount: 14.99 },
+  { merchant: "Microsoft", amount: 9.99 },
+  { merchant: "Dropbox", amount: 11.99 },
+];
+
+function DollarDemo() {
+  const [frozen, setFrozen] = useState(false);
+  const [balance, setBalance] = useState(120);
+  const [charges, setCharges] = useState<Charge[]>(usdInitial);
+  const [n, setN] = useState(0);
+  const [toast, setToast] = useState("");
+
+  useEffect(() => {
+    if (!toast) return;
+    const t = setTimeout(() => setToast(""), 2200);
+    return () => clearTimeout(t);
+  }, [toast]);
+
+  function simulate() {
+    const q = usdQueue[n % usdQueue.length];
+    const ok = !frozen && q.amount <= balance;
+    if (ok) setBalance((b) => b - q.amount);
+    setCharges((c) =>
+      [{ id: Date.now(), merchant: q.merchant, amount: q.amount, when: "Just now", ok, reason: frozen ? "Card was frozen" : "Not enough balance" }, ...c].slice(0, 6),
     );
+    setN((x) => x + 1);
   }
+
   return (
-    <span
-      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-[#15130F]/15 text-sm font-semibold"
-      style={{ backgroundColor: `${C.mutedRed}14`, color: C.mutedRed }}
-      aria-hidden="true"
-    >
-      {name.charAt(0)}
-    </span>
+    <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
+      <div className="space-y-6">
+        <div className="mx-auto w-full max-w-[400px]">
+          <SkribeCard variant="dollar" frozen={frozen} balance={balance} />
+        </div>
+
+        <div className={`${card} p-6`}>
+          <p className="text-sm text-[#15130F]/60">Available balance</p>
+          <p className={`${serif.className} mt-1 text-5xl font-normal tracking-tight`}>{usd(balance)}</p>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <Btn onClick={() => setToast("Top up is coming soon")} className="!h-11 !px-5">
+              Top up
+            </Btn>
+          </div>
+        </div>
+
+        <div className={`${card} p-6`}>
+          <p className={`${mono.className} mb-5 text-xs uppercase tracking-[0.16em] text-[#15130F]/55`}>Controls</p>
+          <div className="flex items-center gap-4">
+            <Tile icon="snowflake" color={C.indigo} />
+            <div className="min-w-0 flex-1">
+              <p className="font-semibold">Freeze card</p>
+              <p className="text-sm text-[#15130F]/60">
+                {frozen ? "Every charge is being declined" : "Decline every charge until you turn it off"}
+              </p>
+            </div>
+            <Toggle value={frozen} onChange={setFrozen} label="Freeze card" />
+          </div>
+          <p className="mt-5 border-t border-dotted border-[#15130F]/25 pt-4 text-sm text-[#15130F]/55">
+            Blocking unrecognised merchants and pausing a subscription are on the naira card.
+          </p>
+        </div>
+      </div>
+
+      <div className={`${card} flex flex-col p-6`}>
+        <div className="mb-2 flex flex-wrap items-center justify-between gap-3">
+          <p className={`${mono.className} text-xs uppercase tracking-[0.16em] text-[#15130F]/55`}>Recent charges</p>
+          <Btn variant="outline" onClick={simulate} className="!h-10 !px-4 !text-sm">
+            Simulate a charge
+          </Btn>
+        </div>
+        <ul className="divide-y divide-dotted divide-[#15130F]/25">
+          {charges.map((c) => (
+            <li key={c.id} className="flex items-center gap-4 py-4">
+              <MerchantTile name={c.merchant} ok={c.ok} />
+              <div className="min-w-0 flex-1">
+                <p className="truncate font-semibold">{c.merchant}</p>
+                <p className="text-sm text-[#15130F]/60">{c.ok ? c.when : `${c.reason} · ${c.when}`}</p>
+              </div>
+              <div className="text-right">
+                <p className={`${mono.className} text-[15px] ${c.ok ? "" : "text-[#15130F]/40 line-through"}`}>{usd(c.amount)}</p>
+                <span
+                  className="mt-1 inline-block rounded-full px-2 py-0.5 text-[11px] font-semibold"
+                  style={{ backgroundColor: c.ok ? `${C.green}1F` : `${C.mutedRed}1A`, color: c.ok ? C.green : C.mutedRed }}
+                >
+                  {c.ok ? "Paid" : "Declined"}
+                </span>
+              </div>
+            </li>
+          ))}
+        </ul>
+        <p className="mt-auto pt-4 text-sm text-[#15130F]/55">Try it: freeze the card, then simulate a charge.</p>
+      </div>
+
+      {toast ? (
+        <div
+          role="status"
+          className="fixed bottom-6 left-1/2 z-[60] -translate-x-1/2 rounded-full px-5 py-3 text-sm font-semibold text-white shadow-lg"
+          style={{ backgroundColor: C.ink }}
+        >
+          {toast}
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
+export function CardDemo() {
+  const [kind, setKind] = useState<"naira" | "dollar">("naira");
+  return (
+    <div>
+      <div role="tablist" aria-label="Card type" className="mb-6 inline-flex rounded-full border border-[#15130F]/20 p-1 text-sm font-semibold">
+        {(
+          [
+            ["naira", "Naira card"],
+            ["dollar", "Dollar card"],
+          ] as const
+        ).map(([k, label]) => (
+          <button
+            key={k}
+            role="tab"
+            aria-selected={kind === k}
+            onClick={() => setKind(k)}
+            className={`rounded-full px-5 py-2 transition ${kind === k ? "bg-[#15130F] text-[#F4EFE6]" : "text-[#15130F]/60 hover:text-[#15130F]"}`}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
+      {kind === "naira" ? <NairaDemo /> : <DollarDemo />}
+    </div>
   );
 }
 

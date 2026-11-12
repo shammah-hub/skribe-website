@@ -86,11 +86,11 @@ const sections: Section[] = [
       {
         list: [
           "Your balance is the amount available for card charges, bill payments and transfers.",
-          "You add money to your balance by [DESCRIBE HOW FUNDING WORKS ONCE IT IS LIVE].",
+          "You add money to your balance by sending a bank transfer, from any bank app, to the funding account number shown in the app. The minimum is ₦100: smaller amounts wait until your deposits add up to ₦100. Money is added to your balance once the bank has sent it and we have received it.",
           "Charges, bills, transfers and fees reduce your balance.",
           "A payment is only approved if your balance covers the amount and the fees.",
-          "Your funds are held with [PARTNER]. [CONFIRM HOW CUSTOMER FUNDS ARE HELD AND PROTECTED.]",
-          "If you close your account, we return your remaining balance after our checks, less any fees you owe.",
+          "Your money is held in accounts with our partners, Sudo Africa and Safe Haven Microfinance Bank, together with the money of other Skribe customers. We keep a record of your balance, and that record is what you can spend.",
+          "To close your account, you first need to send or spend your whole balance. If we close your account, we return your remaining balance after our checks, less any fees you owe.",
           "We may hold or limit funds if we suspect fraud or a legal order requires it.",
         ],
       },
@@ -185,7 +185,7 @@ const sections: Section[] = [
   {
     title: "Suspending or closing your account",
     blocks: [
-      "You can close your account at any time by contacting us once your balance is settled. We may suspend or close your account, with notice where possible, if you break these terms, if we suspect fraud, if the law requires it, or if our partners stop supporting your account. Section 6 explains what happens to your balance.",
+      "You can close your account at any time by deleting it in the app or by contacting us, once your balance is settled. We may suspend or close your account, with notice where possible, if you break these terms, if we suspect fraud, if the law requires it, or if our partners stop supporting your account. Section 6 explains what happens to your balance.",
     ],
   },
   {
@@ -213,7 +213,7 @@ const sections: Section[] = [
         list: [
           "Nothing in these terms limits any right you have under Nigerian law that cannot be limited, including for fraud or for harm caused by our negligence.",
           "Subject to that, we are not responsible for: what merchants do or charge; losses caused by recognition or matching errors that were outside our reasonable control; losses caused by you sharing your PIN or card details; or failures at third parties we do not control.",
-          "Our total responsibility to you for any claim is limited to [AMOUNT / THE FEES YOU PAID IN THE LAST 12 MONTHS]. [HAVE A LAWYER REVIEW THIS SECTION.]",
+          "Subject to the points above, our total responsibility to you for any claim is limited to the fees you paid us in the 12 months before the claim. This limit does not apply to your balance or to any refund we owe you, which we will always pay.",
         ],
       },
     ],
@@ -239,7 +239,7 @@ const sections: Section[] = [
   {
     title: "Governing law",
     blocks: [
-      "These terms are governed by the laws of the Federal Republic of Nigeria. We will try to resolve any dispute fairly and in good faith first. If that fails, MEDIATION / ARBITRATION / THE COURTS OF LAGOS OR ABUJA will decide it.",
+      "These terms are governed by the laws of the Federal Republic of Nigeria. We will try to resolve any dispute fairly and in good faith first. If that fails, the courts of the Federal Capital Territory, Abuja, will decide it.",
     ],
   },
   {
