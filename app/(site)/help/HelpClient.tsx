@@ -70,7 +70,7 @@ export function HelpClient() {
       <div className="mt-16 rounded-3xl border border-[#15130F]/15 bg-[#FFFDF8] p-8 md:p-10">
         <h3 className={`${serif.className} text-4xl font-normal tracking-tight`}>Still stuck?</h3>
         <p className="mt-3 max-w-md leading-relaxed text-[#15130F]/70">
-          Email {hl("skribesubscribers@gmail.com")} and a person will reply within {hl("24 Hours")}. If it's about a charge, include the date,
+          Email {hl("skribesubscribers@gmail.com")} and a person will reply within {hl("24 Hours")}. If it&apos;s about a charge, include the date,
           merchant and amount.
         </p>
       </div>
